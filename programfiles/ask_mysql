@@ -22,10 +22,14 @@ ask() {
 
 # Actions
 
-ask "Please, provides the database user: " mysql_user "You did not provides anything for mysql user!"
-ask "Please, provides the database name: " mysql_databasename "You did not provides anything for mysql database name!"
-ask "Please, provides the database password: " mysql_databasepassword
+ask "1:5 -> Please, provides the database user: " mysql_user "You did not provides anything for mysql user!"
+ask "2:5 -> Please, provides the database name: " mysql_databasename "You did not provides anything for mysql database name!"
+ask "3:5 -> Please, provides the database password: " mysql_databasepassword
+ask "4:5 -> Please, provides the database host: " mysql_host "You did not provides anything to database host."
+ask "5:5 -> Please, provides the database prefix, if required: " mysql_prefix
 
 echo $mysql_user
 echo $mysql_databasename
 echo $mysql_databasepassword
+echo $mysql_host
+echo $mysql_prefix
