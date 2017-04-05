@@ -1,0 +1,31 @@
+#!/bin/bash
+
+# Function definition
+
+# $1: The question title
+# $2: The variable name
+# $3: The error message when blank is provided. If $3 is not, blank answer is allowed.
+ask() {
+    read -p "$1" $2
+
+    var_value=${!2}
+    message_when_blank=$3
+
+    if [ ! ${#message_when_blank} -eq 0 ]; then 
+        if [ ${#var_value} -eq 0 ]; then
+            echo $message_when_blank
+            ask "$1" $2
+        fi
+    fi
+}
+
+
+# Actions
+
+ask "Please, provides the database user: " mysql_user "You did not provides anything for mysql user!"
+ask "Please, provides the database name: " mysql_databasename "You did not provides anything for mysql database name!"
+ask "Please, provides the database password: " mysql_databasepassword
+
+echo $mysql_user
+echo $mysql_databasename
+echo $mysql_databasepassword
