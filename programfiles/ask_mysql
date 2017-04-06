@@ -3,20 +3,25 @@
 # Function definition
 
 # The "Virtual" function for ask_normal and ask_hidden
-# $1: The string that will be evaluated
-# $2: The question title
-# $3: The variable name
-# $4: The error message when blank is provided. If $3 is not, blank answer is allowed.
+# $1: n, for normal, and h for hidden. It means if the ask is outputed or not.
+# $2: The string that will be evaluated
+# $3: The question title
+# $4: The variable name
+# $5: The error message when blank is provided. If $3 is not, blank answer is allowed.
 ask_mysql() {
-    read -p "$1" $2
+    if [ $1 = n ]; then
+        read -p "$2" $3
+    elif [ $1 = h ]; then
+        read -s -p "$2" $3
+    fi
 
-    var_value=${!2}
-    message_when_blank=$3
+    var_value=${!3}
+    message_when_blank=$4
 
     if [ ! ${#message_when_blank} -eq 0 ]; then 
         if [ ${#var_value} -eq 0 ]; then
             echo $message_when_blank
-            ask_mysql "$1" $2 "$3"
+            ask_mysql $1 "$2" $3 "$4"
         fi
     fi
 }
@@ -40,11 +45,12 @@ ask_mysql_hidden() {
 
 # Actions
 
-ask_mysql "1:5 -> Please, provides the database user: " mysql_user "You did not provides anything for mysql user!"
-ask_mysql "2:5 -> Please, provides the database name: " mysql_databasename "You did not provides anything for mysql database name!"
-ask_mysql "3:5 -> Please, provides the database password: " mysql_databasepassword
-ask_mysql "4:5 -> Please, provides the database host: " mysql_host "You did not provides anything to database host."
-ask_mysql "5:5 -> Please, provides the database prefix, if required: " mysql_prefix
+ask_mysql n "1:5 -> Please, provides the database user: " mysql_user "You did not provides anything for mysql user!"
+ask_mysql n "2:5 -> Please, provides the database name: " mysql_databasename "You did not provides anything for mysql database name!"
+ask_mysql h "3:5 -> Please, provides the database password: " mysql_databasepassword
+echo ""
+ask_mysql n "4:5 -> Please, provides the database host: " mysql_host "You did not provides anything to database host."
+ask_mysql n "5:5 -> Please, provides the database prefix, if required: " mysql_prefix
 
 echo $mysql_user
 echo $mysql_databasename
