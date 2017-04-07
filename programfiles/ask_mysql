@@ -52,8 +52,11 @@ echo ""
 ask_mysql n "4:5 -> Please, provides the database host: " mysql_host "You did not provides anything to database host."
 ask_mysql n "5:5 -> Please, provides the database prefix, if required: " mysql_prefix
 
-echo $mysql_user
-echo $mysql_databasename
-echo $mysql_databasepassword
-echo $mysql_host
-echo $mysql_prefix
+# It is spected that the variables be available for another script.
+# But if needs some debug, uncomment following
+
+# echo $mysql_user
+# echo $mysql_databasename
+# echo $mysql_databasepassword
+# echo $mysql_host
+# echo $mysql_prefix
