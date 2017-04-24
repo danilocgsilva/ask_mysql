@@ -34,14 +34,6 @@ ask_mysql_normal() {
     ask_mysql $execute $1 $2 $3
 }
 
-# $1: The question title
-# $2: The variable name
-# $3: The error message when blank is provided. If $3 is not, blank answer is allowed.
-ask_mysql_hidden() {
-    execute='read -s -p'
-    ask_mysql $execute $1 $2 $3
-}
-
 
 # Actions
 
