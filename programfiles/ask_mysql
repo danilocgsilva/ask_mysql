@@ -1,6 +1,11 @@
 #!/bin/bash
 
-# Function definition
+## Static variables definitions
+ask_mysql_version=1
+ask_mysql_source=https://raw.githubusercontent.com/danilocgsilva/ask_mysql/master/programfiles/ask_mysql
+
+
+## Function definition
 
 # The "Virtual" function for ask_normal and ask_hidden
 # $1: n, for normal, and h for hidden. It means if the ask is outputed or not.
@@ -26,29 +31,14 @@ ask_mysql() {
     fi
 }
 
-# $1: The question title
-# $2: The variable name
-# $3: The error message when blank is provided. If $3 is not, blank answer is allowed.
-ask_mysql_normal() {
-    execute='read -p'
-    ask_mysql $execute $1 $2 $3
+
+## Actions
+
+do_ask_mysql() {
+    ask_mysql n "1:5 -> Please, provides the database user: " mysql_user "You did not provides anything for mysql user!"
+    ask_mysql n "2:5 -> Please, provides the database name: " mysql_databasename "You did not provides anything for mysql database name!"
+    ask_mysql h "3:5 -> Please, provides the database password: " mysql_databasepassword
+    echo ""
+    ask_mysql n "4:5 -> Please, provides the database host: " mysql_host "You did not provides anything to database host."
+    ask_mysql n "5:5 -> Please, provides the database prefix, if required: " mysql_prefix
 }
-
-
-# Actions
-
-ask_mysql n "1:5 -> Please, provides the database user: " mysql_user "You did not provides anything for mysql user!"
-ask_mysql n "2:5 -> Please, provides the database name: " mysql_databasename "You did not provides anything for mysql database name!"
-ask_mysql h "3:5 -> Please, provides the database password: " mysql_databasepassword
-echo ""
-ask_mysql n "4:5 -> Please, provides the database host: " mysql_host "You did not provides anything to database host."
-ask_mysql n "5:5 -> Please, provides the database prefix, if required: " mysql_prefix
-
-# It is spected that the variables be available for another script.
-# But if needs some debug, uncomment following
-
-# echo $mysql_user
-# echo $mysql_databasename
-# echo $mysql_databasepassword
-# echo $mysql_host
-# echo $mysql_prefix
