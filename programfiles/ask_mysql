@@ -1,18 +1,20 @@
 #!/bin/bash
 
-## Static variables definitions
-ask_mysql_version=1
+##
+# Static variables definitions
+#
+ask_mysql_version=2
 ask_mysql_source=https://raw.githubusercontent.com/danilocgsilva/ask_mysql/master/programfiles/ask_mysql
 
 
-## Function definition
-
+##
 # The "Virtual" function for ask_normal and ask_hidden
 # $1: n, for normal, and h for hidden. It means if the ask is outputed or not.
 # $2: The string that will be evaluated
 # $3: The question title
 # $4: The variable name
 # $5: The error message when blank is provided. If $3 is not, blank answer is allowed.
+#
 ask_mysql() {
     if [ $1 = n ]; then
         read -p "$2" $3
